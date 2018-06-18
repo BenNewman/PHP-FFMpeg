@@ -98,7 +98,7 @@ class Audio extends AbstractStreamableMedia
      * @since 0.11.0
      */
     protected function buildCommand(FormatInterface $format, $outputPathfile) {
-        $commands = array('-y', '-i', $this->pathfile);
+        $commands = array_merge(array('-y'), $this->getInputOptions(),  array('-i', $this->pathfile));
 
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));

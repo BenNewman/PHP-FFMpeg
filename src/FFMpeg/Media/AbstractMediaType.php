@@ -25,6 +25,8 @@ abstract class AbstractMediaType implements MediaTypeInterface
     protected $ffprobe;
     /** @var FiltersCollection */
     protected $filters;
+    /** @var array */
+    protected $inputOptions = array();
 
     public function __construct($pathfile, FFMpegDriver $driver, FFProbe $ffprobe)
     {
@@ -109,5 +111,24 @@ abstract class AbstractMediaType implements MediaTypeInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @param array $options
+     * @return $this
+     */
+    public function setInputOptions(array $options)
+    {
+        $this->inputOptions = $options;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getInputOptions()
+    {
+        return $this->inputOptions;
     }
 }

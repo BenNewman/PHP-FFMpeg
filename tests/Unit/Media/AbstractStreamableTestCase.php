@@ -34,5 +34,18 @@ abstract class AbstractStreamableTestCase extends AbstractMediaTestCase
         $this->assertSame($streams, $media->getStreams());
     }
 
+    public function testGetInputOptions()
+    {
+        $classname = $this->getClassName();
+        $ffprobe = $this->getFFProbeMock();
+
+        $media = new $classname(__FILE__, $this->getFFMpegDriverMock(), $ffprobe);
+
+        $inputOptions = array('-noautorotate');
+        $media->setInputOptions($inputOptions);
+
+        $this->assertEquals($inputOptions, $media->getInputOptions());
+    }
+
     abstract protected function getClassName();
 }

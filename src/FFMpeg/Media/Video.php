@@ -135,7 +135,7 @@ class Video extends Audio
      * @return string[][]
      */
     protected function buildCommand(FormatInterface $format, $outputPathfile) {
-        $commands = array('-y', '-i', $this->pathfile);
+        $commands = array_merge(array('-y'), $this->getInputOptions(),  array('-i', $this->pathfile));
 
         $filters = clone $this->filters;
         $filters->add(new SimpleFilter($format->getExtraParams(), 10));
